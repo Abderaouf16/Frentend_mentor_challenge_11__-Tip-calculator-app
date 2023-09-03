@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Frontend Mentor | Tip calculator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+  </style>
+</head>
+
+<body>
+  <p class="brand-name">Splt <br>ttrer</p>
+  <main>
+    <div class="card-container">
+      <div class="tip-calculation">
+        <label for="">bill</label>
+        <div class="bill-container">
+          <img src="./images/icon-dollar.svg" alt="">
+          <input type="text">
+        </div>
+        <label for="">Select tip %</label>
+        <div class="tipPercentage-container">
+          <div class="">
+            <button>5%</button>
+          </div>
+          <div class="">
+            <button>10%</button>
+
+          </div>
+          <div class="">
+            <button>15%</button>
+
+          </div>
+          <div class="">
+            <button>25%</button>
+
+          </div>
+          <div class="">
+            <button>50%</button>
+
+          </div>
+          <div class="custom-tip">
+            
+            <input type="text" placeholder="Custom">
+
+          </div>
+        </div>
+        <label for="">Number of people</label>
+        <div class="peopleNum-container">
+          <img src="./images/icon-person.svg" alt="">
+          <input type="text">
+        </div>
+      </div>
+      <div class="tip-values">
+        <div class="result-calculation">
+          <div class="tip-amount-container">
+            <div class="tip-title">
+              <p>Tip Amount</p>
+              <p>/ person</p>
+            </div>
+            <h1 class="tip-value">$<span id="tip-amount">088</span></h1>
+          </div>
+          <div class="tip-total-container">
+            <div class="tip-title">
+              <p>Total</p>
+              <p>/ person</p>
+            </div>
+            <h1 class="tip-value">$<span id="tip-total">5.55</span></h1>
+          </div>
+        </div>
+        <button>Reset</button>
+      </div>
+    </div>
+  </main>
+
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+</body>
+
+</html>
