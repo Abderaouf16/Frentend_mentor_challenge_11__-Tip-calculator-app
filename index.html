@@ -13,12 +13,12 @@
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
     .attribution {
-      font-size: 11px;
+      font-size: 0.8rem;
       text-align: center;
     }
 
     .attribution a {
-      color: hsl(228, 45%, 44%);
+      color: hsl(38, 74%, 46%);
     }
   </style>
 </head>
@@ -35,27 +35,34 @@
         </div>
         <label for="">Select tip %</label>
         <div class="tipPercentage-container">
-          <div class="">
-            <button>5%</button>
-          </div>
-          <div class="">
-            <button>10%</button>
+          <input type="radio" name="tip-percentage" id="tip-5" value="5">
+          <label for="tip-5">
+            <span>5%</span>
+          </label>
 
-          </div>
-          <div class="">
-            <button>15%</button>
 
-          </div>
-          <div class="">
-            <button>25%</button>
+          <input type="radio" name="tip-percentage" id="tip-10" value="10">
+          <label for="tip-10">
+            <span>10%</span>
+          </label>
 
-          </div>
-          <div class="">
-            <button>50%</button>
+          <input type="radio" name="tip-percentage" id="tip-15" value="15">
+          <label for="tip-15">
+            <span>15%</span>
+          </label>
 
-          </div>
+          <input type="radio" name="tip-percentage" id="tip-25" value="25">
+          <label for="tip-25">
+            <span>25%</span>
+          </label>
+
+          <input type="radio" name="tip-percentage" id="tip-50" value="50">
+          <label for="tip-50">
+            <span>50%</span>
+          </label>
+
           <div class="custom-tip">
-            
+
             <input type="text" placeholder="Custom">
 
           </div>
@@ -91,7 +98,7 @@
 
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-    Coded by <a href="#">Your Name Here</a>.
+    Coded by <a href="https://www.linkedin.com/in/abderaouf-khamoum-657527260/">KHAMOUM Abderraouf</a>.
   </div>
 </body>
 
