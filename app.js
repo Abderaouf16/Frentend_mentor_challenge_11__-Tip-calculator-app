@@ -7,6 +7,10 @@ const resetBtn = document.getElementById("reset-btn");
 const tipPercentage_input = document.querySelectorAll(".tipPercentage-input");
 const customTipInput = document.getElementById("customTip-input");
 
+const bill_Container = document.querySelector(".bill-container");
+const peopleNum_Container = document.querySelector(".peopleNum-container");
+const percentage_btn_container = document.querySelectorAll(".percentage-btn-container");
+
 // UNCHECK TIP PERCENTAGE BTN IF THE USER CLICKS ON THE TIP CUSTOM INPUT
 
 customTipInput.addEventListener("click", function () {
@@ -27,16 +31,20 @@ let tipAmount;
 //6
 let total;
 
-let newtippercentagevalue;
+let newTipPercentageValue;
 
 
 // GET THE BILL VALUE & UPDATE THE 'billValue' VARIABLE  
 
 billInput.addEventListener("input", function updateBillValue() {
   billValue = billInput.value;
-  if (tipPercentage == undefined) {
+  inputValidation(billValue,1, bill_Container)
+
+  if( isNaN(billValue) ){
+    billValue == ''
+  } else if (tipPercentage == undefined) {
     console.log("tippercentage not available");
-  } else {
+  } else{  
     updateTipAmount();
     updateTotalMoney();
   }
@@ -46,8 +54,9 @@ billInput.addEventListener("input", function updateBillValue() {
 // GET THE CUSTOM TIP PERCENTAGE FROM THE INPUT & UPDATE THE 'newtippercentagevalue' VARIABLE 
 
 customTipInput.addEventListener("input", function () {
-  newtippercentagevalue = customTipInput.value;
-  newtippercentage();
+  newTipPercentageValue = customTipInput.value;
+  inputValidation(newTipPercentageValue, 2, customTip_input)
+  newtipPercentage();
 });
 
 
@@ -59,18 +68,22 @@ tipPercentage_input.forEach((element) => {
     const selected = document.querySelector(
       'input[name="tipPercentage"]:checked'
     );
-    newtippercentagevalue = selected.value;
-    newtippercentage();
+    newTipPercentageValue = selected.value;
+    cleatInputValidation(customTip_input)
+    newtipPercentage();
+    
+  
   });
 });
 
 // UPDATE THE 'tipPercentage' VARIABLE
 
-function newtippercentage() {
-  tipPercentage = newtippercentagevalue;
+function newtipPercentage() {
+  tipPercentage = newTipPercentageValue;
 
   if (billValue == undefined) {
-    console.log("billValue not available");
+    console.log("billValue not available")
+    // setErrorMessage(1,"Cant't be Zero")
   } else {
     updateTipAmount();
   }
@@ -100,7 +113,23 @@ function updateTipAmount() {
 
 peopleNumber_input.addEventListener("input", function () {
   peopleNumber = peopleNumber_input.value;
-  updateTotalMoney();
+  if( isNaN(peopleNumber) ){
+    peopleNumber == ''
+  }else{
+    updateTotalMoney();
+    
+  }
+ if(billValue == undefined){
+   bill_Container.style.border = "1px solid red";
+   setErrorMessage(1, "Cant't be blank")
+ }
+  if (newTipPercentageValue == undefined){
+  setErrorMessage(2, "Must chose one")
+  redBorder(customTip_input)
+  redBorder(percentage_btn_container)
+ }
+  inputValidation(peopleNumber,3,peopleNum_Container)
+  
 });
 
 
@@ -114,4 +143,91 @@ function updateTotalMoney() {
     console.log("there is no tipAmount");
   }
 }
+
+const billMessage = document.getElementById("billMessage");
+const peopleNumberMessage = document.getElementById("pepleNum-message");
+const customTipMessage = document.getElementById("selectTip-message");
+
+
+function setErrorMessage(num, message) {
+  switch (num) {
+    case 1:
+      billMessage.innerText = message;
+      break;
+    case 2:  
+    customTipMessage.innerText = message;
+      break;
+    case 3:
+      peopleNumberMessage.innerText = message;
+      break;
+  }
+}
+
+
+//FOR THE INPUT RED BORDER COLOR INDICATING ERROR
+
+function redBorder(input) {
+  switch (true) {
+    case input == bill_Container:
+      bill_Container.style.border = "1px solid red";
+      break;
+      case input == customTip_input:
+        customTip_input.style.border = "1px solid red";
+      break;
+    case input == peopleNum_Container:
+      peopleNum_Container.style.border = "1px solid red";
+      break;
+      case input == percentage_btn_container:
+        percentage_btn_container.forEach((element)=>{
+          element.style.border = "2px solid red";
+        })
+        break;
+  }
+}
+
+//FOR THE INPUT green BORDER COLOR INDICATING success
+
+function greenBorder(input) {
+  switch (true) {
+    case input == bill_Container:
+      bill_Container.style.border = "1px solid green";
+      billMessage.innerText = '';
+      break;
+      case input == customTip_input:
+        customTip_input.style.border = "1px solid green";
+        customTipMessage.innerText = '';
+        break;
+    case input == peopleNum_Container:
+      peopleNum_Container.style.border = "1px solid green";
+      peopleNumberMessage.innerText = '';
+      break;
+
+  }
+}
+
+function cleatInputValidation(input){
+  customTip_input.value= '';
+  customTip_input.style.border = "none";
+  customTipMessage.innerText = '';
+}
+
+
+function inputValidation (value,caseNum, input){
+
+  if(!value){
+    setErrorMessage(caseNum,"Cant't be blank")
+    redBorder(input)
+  }else if(value== 0){
+    setErrorMessage(caseNum,"Cant't be zero")
+    redBorder(input)
+  }else if ( isNaN(value) ){
+    setErrorMessage(caseNum,"Wrong format")
+    redBorder(input)
+  }else {
+    greenBorder(input)
+
+  }
+
+}
+
 

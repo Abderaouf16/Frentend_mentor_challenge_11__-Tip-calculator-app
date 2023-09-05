@@ -85,6 +85,7 @@ main {
   padding: 0.1rem 1rem;
   border-radius: 5px;
   margin-bottom: 1.4rem;
+  
 }
 input[type="text"] {
   cursor: pointer;
@@ -203,7 +204,7 @@ input[type="radio"]:checked + label {
     margin-top: 2rem;
   }
   main {
-    width:650px ;
+    width:700px ;
   }
   .card-container {
     display: flex;
@@ -236,4 +237,19 @@ input[type="radio"]:checked + label {
 
 .tip-values button:hover {
   background-color: hsl(172, 67%, 70%);
+}
+
+/*FOR VALIVATION*/
+
+
+.message{
+  color: red;
+  font-size: 12px;
+  
+}
+
+.bill-title-container, .selectTip-title-container, .peopleNumber-title-container{
+  display :flex;
+  justify-content: space-between;
+  align-items: center;
 }
