@@ -28,49 +28,47 @@
   <main>
     <div class="card-container">
       <div class="tip-calculation">
-        <label for="">bill</label>
-        <div class="bill-container">
+        <label for="bill-input">bill</label>
+        <div  class="bill-container">
           <img src="./images/icon-dollar.svg" alt="">
-          <input type="text">
+          <input id="bill-input" type="text">
         </div>
         <label for="">Select tip %</label>
         <div class="tipPercentage-container">
-          <input type="radio" name="tip-percentage" id="tip-5" value="5">
+          <input class="tipPercentage-input" type="radio" name="tipPercentage" id="tip-5" value="5" >
           <label for="tip-5">
             <span>5%</span>
           </label>
 
 
-          <input type="radio" name="tip-percentage" id="tip-10" value="10">
+          <input class="tipPercentage-input" type="radio" name="tipPercentage" id="tip-10" value="10">
           <label for="tip-10">
             <span>10%</span>
           </label>
 
-          <input type="radio" name="tip-percentage" id="tip-15" value="15">
+          <input class="tipPercentage-input" type="radio" name="tipPercentage" id="tip-15" value="15">
           <label for="tip-15">
             <span>15%</span>
           </label>
 
-          <input type="radio" name="tip-percentage" id="tip-25" value="25">
+          <input class="tipPercentage-input" type="radio" name="tipPercentage" id="tip-25" value="25">
           <label for="tip-25">
             <span>25%</span>
           </label>
 
-          <input type="radio" name="tip-percentage" id="tip-50" value="50">
+          <input class="tipPercentage-input" type="radio" name="tipPercentage" id="tip-50" value="50">
           <label for="tip-50">
             <span>50%</span>
           </label>
 
           <div class="custom-tip">
-
-            <input type="text" placeholder="Custom">
-
+            <input id="customTip-input" type="text" placeholder="Custom" >
           </div>
         </div>
-        <label for="">Number of people</label>
+        <label for="peopleNum-input">Number of people</label>
         <div class="peopleNum-container">
           <img src="./images/icon-person.svg" alt="">
-          <input type="text">
+          <input id="peopleNum-input" type="text">
         </div>
       </div>
       <div class="tip-values">
@@ -80,17 +78,17 @@
               <p>Tip Amount</p>
               <p>/ person</p>
             </div>
-            <h1 class="tip-value">$<span id="tip-amount">088</span></h1>
+            <h1 class="tip-value">$<span id="tip-amount">0</span></h1>
           </div>
           <div class="tip-total-container">
             <div class="tip-title">
               <p>Total</p>
               <p>/ person</p>
             </div>
-            <h1 class="tip-value">$<span id="tip-total">5.55</span></h1>
+            <h1 class="tip-value">$<span id="tip-total">0</span></h1>
           </div>
         </div>
-        <button>Reset</button>
+        <button id="reset-btn">Reset</button>
       </div>
     </div>
   </main>
@@ -101,5 +99,5 @@
     Coded by <a href="https://www.linkedin.com/in/abderaouf-khamoum-657527260/">KHAMOUM Abderraouf</a>.
   </div>
 </body>
-
+<script src="app.js"></script>
 </html>
