@@ -57,7 +57,9 @@ customTipInput.addEventListener("input", function () {
   newTipPercentageValue = customTipInput.value;
   if(isNaN(newTipPercentageValue)){
     newTipPercentageValue=="";
-  }else{
+  }else if(newTipPercentageValue.length > 2){
+    customTipInput.value= newTipPercentageValue.slice(0,2)
+  } else{
     newtipPercentage();
     
   }
