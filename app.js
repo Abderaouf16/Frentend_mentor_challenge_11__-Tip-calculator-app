@@ -257,5 +257,10 @@ resetBtn.addEventListener('click', function(){
   tipPercentage_input.forEach((element) => {
     element.checked = false;
   });
-
+  billValue = undefined
+   tipPercentage =undefined
+  peopleNumber =undefined
+   tipAmount=undefined
+   total=undefined
+  newTipPercentageValue=undefined
 })
