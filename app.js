@@ -38,16 +38,16 @@ let newTipPercentageValue;
 
 billInput.addEventListener("input", function updateBillValue() {
   billValue = billInput.value;
-  inputValidation(billValue,1, bill_Container)
 
-  if( isNaN(billValue) ){
-    billValue == ''
-  } else if (tipPercentage == undefined) {
-    console.log("tippercentage not available");
-  } else{  
-    updateTipAmount();
+if(peopleNumber == undefined){
+    total=='';
+  } 
+  else{  
     updateTotalMoney();
   }
+  updateTipAmount();
+  inputValidation(billValue,1, bill_Container)
+
 });
 
 
@@ -55,8 +55,13 @@ billInput.addEventListener("input", function updateBillValue() {
 
 customTipInput.addEventListener("input", function () {
   newTipPercentageValue = customTipInput.value;
+  if(isNaN(newTipPercentageValue)){
+    newTipPercentageValue=="";
+  }else{
+    newtipPercentage();
+    
+  }
   inputValidation(newTipPercentageValue, 2, customTip_input)
-  newtipPercentage();
   clearTipBtnValidation()
 });
 
@@ -70,9 +75,9 @@ tipPercentage_input.forEach((element) => {
       'input[name="tipPercentage"]:checked'
     );
     newTipPercentageValue = selected.value;
+    newtipPercentage();
 
     cleatInputValidation(customTip_input,customTipMessage)
-    newtipPercentage();
     clearTipBtnValidation()
   
   });
@@ -103,12 +108,15 @@ function newtipPercentage() {
 // PRINT THE TIP AMOUNT VALUE IN THE CARD
 
 function updateTipAmount() {
-  if (billValue !== undefined && tipPercentage !== undefined) {
+  if(isNaN(billValue) || isNaN(tipPercentage)){
+    tipAmount == undefined;
+  } else if (billValue !== undefined && tipPercentage !== undefined) {
     tipAmount = billValue * (tipPercentage * 0.01);
     tipAmount_text.innerText = tipAmount;
   } else {
     console.log("bill or tip percentage error");
   }
+  
 }
 
 // GET PEOPLE NUMBER FROM THE INPUT & UPDATE THE 'peopleNumber' VARIABLE 
@@ -126,7 +134,7 @@ peopleNumber_input.addEventListener("input", function () {
    setErrorMessage(1, "Cant't be blank")
  }
   if (newTipPercentageValue == undefined){
-  setErrorMessage(2, "Must chose one")
+  setErrorMessage(2, "Select tip %")
   redBorder(customTip_input)
   redBorder(percentage_btn_container)
  }
@@ -138,7 +146,7 @@ peopleNumber_input.addEventListener("input", function () {
 // PRINT  THE TOTAL MONEY VALUE IN THE CARD
 
 function updateTotalMoney() {
-  if (tipAmount) {
+  if (tipAmount!== undefined ) {
     total = tipAmount * peopleNumber;
     tipTotal_text.innerText = total;
   } else {
