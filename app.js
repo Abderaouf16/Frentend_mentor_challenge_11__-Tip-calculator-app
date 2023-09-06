@@ -57,6 +57,7 @@ customTipInput.addEventListener("input", function () {
   newTipPercentageValue = customTipInput.value;
   inputValidation(newTipPercentageValue, 2, customTip_input)
   newtipPercentage();
+  clearTipBtnValidation()
 });
 
 
@@ -69,9 +70,10 @@ tipPercentage_input.forEach((element) => {
       'input[name="tipPercentage"]:checked'
     );
     newTipPercentageValue = selected.value;
-    cleatInputValidation(customTip_input)
+
+    cleatInputValidation(customTip_input,customTipMessage)
     newtipPercentage();
-    
+    clearTipBtnValidation()
   
   });
 });
@@ -205,12 +207,16 @@ function greenBorder(input) {
   }
 }
 
-function cleatInputValidation(input){
-  customTip_input.value= '';
-  customTip_input.style.border = "none";
+function cleatInputValidation(input,errorMessageContainer){
+  input.value= '';
+  input.style.border = "none";
   customTipMessage.innerText = '';
 }
-
+function clearTipBtnValidation(){
+  percentage_btn_container.forEach((element)=>{
+    element.style.border = "none";
+  })
+}
 
 function inputValidation (value,caseNum, input){
 
