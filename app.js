@@ -247,3 +247,15 @@ function inputValidation (value,caseNum, input){
 }
 
 
+
+resetBtn.addEventListener('click', function(){
+  tipTotal_text.innerText = 0;
+  tipAmount_text.innerText =0 ;
+  billInput.value = '';
+  customTipInput.value= '';
+  peopleNumber_input.value= '';
+  tipPercentage_input.forEach((element) => {
+    element.checked = false;
+  });
+
+})
