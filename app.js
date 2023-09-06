@@ -114,7 +114,7 @@ function updateTipAmount() {
     tipAmount == undefined;
   } else if (billValue !== undefined && tipPercentage !== undefined) {
     tipAmount = billValue * (tipPercentage * 0.01);
-    tipAmount_text.innerText = tipAmount;
+    tipAmount_text.innerText = tipAmount.toFixed(1);
   } else {
     console.log("bill or tip percentage error");
   }
@@ -150,7 +150,7 @@ peopleNumber_input.addEventListener("input", function () {
 function updateTotalMoney() {
   if (tipAmount!== undefined ) {
     total = tipAmount * peopleNumber;
-    tipTotal_text.innerText = total;
+    tipTotal_text.innerText = total.toFixed(1);
   } else {
     console.log("there is no tipAmount");
   }
