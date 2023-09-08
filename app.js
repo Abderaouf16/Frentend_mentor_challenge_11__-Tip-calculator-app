@@ -12,13 +12,19 @@ const percentage_btn_container = document.querySelectorAll(
   ".percentage-btn-container"
 );
 
-// UNCHECK TIP PERCENTAGE BTN IF THE USER CLICKS ON THE TIP CUSTOM INPUT
+/* -------------------------------------------------------------------
 
-customTipInput.addEventListener("click", function () {
-  tipPercentage_input.forEach((element) => {
-    element.checked = false;
-  });
+                              EVENTLISTENERS
+
+--------------------------------------------------------------------*/
+
+billInput.addEventListener("input", updateBillValue);
+customTipInput.addEventListener("input", getCustomTip);
+peopleNumber_input.addEventListener("input", getPeopleNumber);
+tipPercentage_input.forEach((button) => {
+  button.addEventListener("click", getSelectedTipPercentage);
 });
+resetBtn.addEventListener("click", resetAll);
 
 // PROCCESS VARIABLES
 // 1
@@ -34,13 +40,17 @@ let tipAmount;
 //5
 let total;
 
+// MAIN FUNCTIONS AND LOGIC
 
-                         // MAIN FUNCTIONS AND LOGIC
+/*-----------------------------------------------------------------------------
 
+                                      FUNCTIONS
+
+------------------------------------------------------------------------------*/
 
 // GET THE BILL VALUE & UPDATE THE 'billValue' VARIABLE
 
-billInput.addEventListener("input", function updateBillValue() {
+function updateBillValue() {
   billValue = billInput.value;
 
   if (peopleNumber == undefined) {
@@ -49,41 +59,36 @@ billInput.addEventListener("input", function updateBillValue() {
     updateTotalMoney();
   }
   updateTipAmount();
-  inputValidation(billValue, 1, bill_Container,billMessage);
-});
+  inputValidation(billValue, 1, bill_Container, billMessage);
+}
 
 // GET THE CUSTOM TIP PERCENTAGE FROM THE INPUT & UPDATE THE 'newtippercentagevalue' VARIABLE
 
-customTipInput.addEventListener("input", function () {
+function getCustomTip() {
+  tipPercentage_input.forEach((element) => {
+    element.checked = false;
+  });
   newTipPercentageValue = customTipInput.value;
-  if (isNaN(newTipPercentageValue)) {
-    newTipPercentageValue == "";
-  } else if (newTipPercentageValue.length > 2) {
+  if (newTipPercentageValue.length > 2) {
     customTipInput.value = newTipPercentageValue.slice(0, 2);
   } else {
     newtipPercentage();
   }
   inputValidation(newTipPercentageValue, 2, customTip_input, customTipMessage);
-  clearTipBtnValidation();
-});
+}
 
 // GET THE TIP PERCENTAGE FROM 'BUTTONS %'  & UPDATE THE 'newtippercentagevalue' VARIABLE
 
-tipPercentage_input.forEach((element) => {
-  element.addEventListener("click", function () {
-    const selected = document.querySelector(
-      'input[name="tipPercentage"]:checked'
-    );
-    newTipPercentageValue = selected.value;
-    newtipPercentage();
+function getSelectedTipPercentage() {
+  const selected = document.querySelector(
+    'input[name="tipPercentage"]:checked'
+  );
+  newTipPercentageValue = selected.value;
+  newtipPercentage();
 
-    // clear text, message, borderColor of customTipinput when the user clicks on a btn percentage
-    cleatInputValidation(customTip_input, customTipMessage);
-    
-    // clear red border when checked
-    clearTipBtnValidation(); 
-  });
-});
+  // clear text, message, borderColor of customTipinput when the user clicks on a btn percentage
+  cleatInputValidation(customTip_input, customTipMessage);
+}
 
 // UPDATE THE 'tipPercentage' VARIABLE
 
@@ -97,7 +102,7 @@ function newtipPercentage() {
     updateTipAmount();
   }
   if (peopleNumber !== undefined) {
-    updateTotalMoney(); 
+    updateTotalMoney();
   } else {
     console.log("people number is required");
   }
@@ -118,47 +123,58 @@ function updateTipAmount() {
 
 // GET PEOPLE NUMBER FROM THE INPUT & UPDATE THE 'peopleNumber' VARIABLE
 
-peopleNumber_input.addEventListener("input", function () {
+function getPeopleNumber() {
   peopleNumber = peopleNumber_input.value;
-  if (isNaN(peopleNumber)) {
-    peopleNumber = "";
-  } else {
-    updateTotalMoney();
-  }
+  updateTotalMoney();
+
   if (billValue == undefined) {
     bill_Container.style.border = "1px solid red";
     setErrorMessage(1, "Cant't be blank");
   }
-  // if (newTipPercentageValue == undefined) {
-  //   //INFORM THE USER TO FILL THE BILL INPUT AND SELECT OR WRITE A TIP PERCENTAGE BY A MESSAGE 1 & REDBORDERCOLOR
-  //   setErrorMessage(2, "Select tip %");
-  //   redBorder(customTip_input);
-  //   redBorder(percentage_btn_container);
-  // }
-  inputValidation(peopleNumber, 3, peopleNum_Container,peopleNumberMessage);
-});
+  inputValidation(peopleNumber, 3, peopleNum_Container, peopleNumberMessage);
+}
 
 // PRINT  THE TOTAL MONEY VALUE IN THE CARD
 
 function updateTotalMoney() {
   if (tipAmount !== undefined) {
-    total = tipAmount * peopleNumber;
+    total = billValue * peopleNum + tipAmount;
     tipTotal_text.innerText = total.toFixed(1);
   } else {
-    console.log("there is no tipAmount");
+    total = billValue * peopleNumber;
   }
 }
 
-                       // VALIDATION FUNCTIONS
+/*------------------------------------------------------------------------
 
+                           VALIDATION FUNCTIONS
+
+----------------------------------------------------------------------*/
 
 const billMessage = document.getElementById("billMessage");
 const peopleNumberMessage = document.getElementById("pepleNum-message");
 const customTipMessage = document.getElementById("selectTip-message");
 
+// INPUTS VALIDATION
+
+function inputValidation(value, caseNum, input, messageTag) {
+  if (!value) {
+    setErrorMessage(caseNum, "Cant't be blank");
+    input.style.border = "1px solid red";
+  } else if (value == 0) {
+    setErrorMessage(caseNum, "Cant't be zero");
+    input.style.border = "1px solid red";
+  } else if (isNaN(value)) {
+    value == "";
+    setErrorMessage(caseNum, "Wrong format");
+    input.style.border = "1px solid red";
+  } else {
+    input.style.border = "1px solid green";
+    messageTag.innerText = "";
+  }
+}
 
 // PRINT ERROR MESSAGE FOR SPECIFIC INPUT
-
 
 function setErrorMessage(num, message) {
   switch (num) {
@@ -174,9 +190,7 @@ function setErrorMessage(num, message) {
   }
 }
 
-
-
-// CLEAR INPUT VALIDATION 
+// CLEAR INPUT VALIDATION
 
 function cleatInputValidation(input) {
   input.value = "";
@@ -184,40 +198,15 @@ function cleatInputValidation(input) {
   customTipMessage.innerText = "";
 }
 
-// CLEAR THE SELECT TIP BOTTONS RED BORDER COLOR
+/* ----------------------------------
 
-function clearTipBtnValidation() {
-  percentage_btn_container.forEach((element) => {
-    element.style.border = "none";
-  });
-}
+           RESET FUNCTION
 
-
-// INPUTS VALIDATION
-
-
-function inputValidation(value, caseNum, input, messageTag) {
-  if (!value) {
-    setErrorMessage(caseNum, "Cant't be blank");
-    input.style.border = "1px solid red";
-  } else if (value == 0) {
-    setErrorMessage(caseNum, "Cant't be zero");
-    input.style.border = "1px solid red";
-  } else if (isNaN(value)) {
-    setErrorMessage(caseNum, "Wrong format");
-    input.style.border = "1px solid red";
-  } else {
-    input.style.border = "1px solid green";
-    messageTag.innerText = "";
-  }
-}
-
-
-                         // RESET FUNCTION
+------------------------------------*/
 
 // RESET EVERY THING IN THE CARD
 
-resetBtn.addEventListener("click", function () {
+function resetAll() {
   tipTotal_text.innerText = 0;
   tipAmount_text.innerText = 0;
   billInput.value = "";
@@ -232,4 +221,4 @@ resetBtn.addEventListener("click", function () {
   tipAmount = undefined;
   total = undefined;
   newTipPercentageValue = undefined;
-});
+}
