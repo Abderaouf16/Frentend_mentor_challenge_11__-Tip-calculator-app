@@ -49,7 +49,7 @@ billInput.addEventListener("input", function updateBillValue() {
     updateTotalMoney();
   }
   updateTipAmount();
-  inputValidation(billValue, 1, bill_Container);
+  inputValidation(billValue, 1, bill_Container,billMessage);
 });
 
 // GET THE CUSTOM TIP PERCENTAGE FROM THE INPUT & UPDATE THE 'newtippercentagevalue' VARIABLE
@@ -63,7 +63,7 @@ customTipInput.addEventListener("input", function () {
   } else {
     newtipPercentage();
   }
-  inputValidation(newTipPercentageValue, 2, customTip_input);
+  inputValidation(newTipPercentageValue, 2, customTip_input, customTipMessage);
   clearTipBtnValidation();
 });
 
@@ -129,13 +129,13 @@ peopleNumber_input.addEventListener("input", function () {
     bill_Container.style.border = "1px solid red";
     setErrorMessage(1, "Cant't be blank");
   }
-  if (newTipPercentageValue == undefined) {
-    //INFORM THE USER TO FILL THE BILL INPUT AND SELECT OR WRITE A TIP PERCENTAGE BY A MESSAGE 1 & REDBORDERCOLOR
-    setErrorMessage(2, "Select tip %");
-    redBorder(customTip_input);
-    redBorder(percentage_btn_container);
-  }
-  inputValidation(peopleNumber, 3, peopleNum_Container);
+  // if (newTipPercentageValue == undefined) {
+  //   //INFORM THE USER TO FILL THE BILL INPUT AND SELECT OR WRITE A TIP PERCENTAGE BY A MESSAGE 1 & REDBORDERCOLOR
+  //   setErrorMessage(2, "Select tip %");
+  //   redBorder(customTip_input);
+  //   redBorder(percentage_btn_container);
+  // }
+  inputValidation(peopleNumber, 3, peopleNum_Container,peopleNumberMessage);
 });
 
 // PRINT  THE TOTAL MONEY VALUE IN THE CARD
@@ -174,49 +174,11 @@ function setErrorMessage(num, message) {
   }
 }
 
-//FOR THE INPUT RED BORDER COLOR INDICATING ERROR
 
-function redBorder(input) {
-  switch (true) {
-    case input == bill_Container:
-      bill_Container.style.border = "1px solid red";
-      break;
-    case input == customTip_input:
-      customTip_input.style.border = "1px solid red";
-      break;
-    case input == peopleNum_Container:
-      peopleNum_Container.style.border = "1px solid red";
-      break;
-    case input == percentage_btn_container:
-      percentage_btn_container.forEach((element) => {
-        element.style.border = "2px solid red";
-      });
-      break;
-  }
-}
-
-//FOR THE INPUT green BORDER COLOR INDICATING success
-
-function greenBorder(input) {
-  switch (true) {
-    case input == bill_Container:
-      bill_Container.style.border = "1px solid green";
-      billMessage.innerText = ""; // delete the ERROR message 
-      break;
-    case input == customTip_input:
-      customTip_input.style.border = "1px solid green";
-      customTipMessage.innerText = "";
-      break;
-    case input == peopleNum_Container:
-      peopleNum_Container.style.border = "1px solid green";
-      peopleNumberMessage.innerText = "";
-      break;
-  }
-}
 
 // CLEAR INPUT VALIDATION 
 
-function cleatInputValidation(input, errorMessageContainer) {
+function cleatInputValidation(input) {
   input.value = "";
   input.style.border = "none";
   customTipMessage.innerText = "";
@@ -234,18 +196,19 @@ function clearTipBtnValidation() {
 // INPUTS VALIDATION
 
 
-function inputValidation(value, caseNum, input) {
+function inputValidation(value, caseNum, input, messageTag) {
   if (!value) {
     setErrorMessage(caseNum, "Cant't be blank");
-    redBorder(input);
+    input.style.border = "1px solid red";
   } else if (value == 0) {
     setErrorMessage(caseNum, "Cant't be zero");
-    redBorder(input);
+    input.style.border = "1px solid red";
   } else if (isNaN(value)) {
     setErrorMessage(caseNum, "Wrong format");
-    redBorder(input);
+    input.style.border = "1px solid red";
   } else {
-    greenBorder(input);
+    input.style.border = "1px solid green";
+    messageTag.innerText = "";
   }
 }
 
