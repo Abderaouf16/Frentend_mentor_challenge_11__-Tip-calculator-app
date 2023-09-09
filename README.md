@@ -34,8 +34,7 @@ Users should be able to:
 
 -- validation 
 ![Alt text](images/ScreenShots/validation%203.png)
-![Alt text](images/ScreenShots/validation%202.png)
-![Alt text](images/ScreenShots/validation%203.png)
+![Alt text](images/ScreenShots/validation%201.png)
 -- mobile view
 
 ![Alt text](images/ScreenShots/mobile%20view.png)
