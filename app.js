@@ -62,6 +62,8 @@ function updateBillValue() {
   inputValidation(billValue, 1, bill_Container, billMessage);
 }
 
+
+
 // GET THE CUSTOM TIP PERCENTAGE FROM THE INPUT & UPDATE THE 'newtippercentagevalue' VARIABLE
 
 function getCustomTip() {
@@ -77,6 +79,8 @@ function getCustomTip() {
   inputValidation(newTipPercentageValue, 2, customTip_input, customTipMessage);
 }
 
+
+
 // GET THE TIP PERCENTAGE FROM 'BUTTONS %'  & UPDATE THE 'newtippercentagevalue' VARIABLE
 
 function getSelectedTipPercentage() {
@@ -89,6 +93,8 @@ function getSelectedTipPercentage() {
   // clear text, message, borderColor of customTipinput when the user clicks on a btn percentage
   cleatInputValidation(customTip_input, customTipMessage);
 }
+
+
 
 // UPDATE THE 'tipPercentage' VARIABLE
 
@@ -108,6 +114,8 @@ function newtipPercentage() {
   }
 }
 
+
+
 // PRINT THE TIP AMOUNT VALUE IN THE CARD
 
 function updateTipAmount() {
@@ -121,28 +129,34 @@ function updateTipAmount() {
   }
 }
 
+
+
 // GET PEOPLE NUMBER FROM THE INPUT & UPDATE THE 'peopleNumber' VARIABLE
 
 function getPeopleNumber() {
   peopleNumber = peopleNumber_input.value;
-  updateTotalMoney();
-
+  
   if (billValue == undefined) {
     bill_Container.style.border = "1px solid red";
     setErrorMessage(1, "Cant't be blank");
+  }else{
+    updateTotalMoney();
   }
+
   inputValidation(peopleNumber, 3, peopleNum_Container, peopleNumberMessage);
 }
+
+
 
 // PRINT  THE TOTAL MONEY VALUE IN THE CARD
 
 function updateTotalMoney() {
-  if (tipAmount !== undefined) {
-    total = billValue * peopleNum + tipAmount;
-    tipTotal_text.innerText = total.toFixed(1);
+  if (tipAmount !== undefined && billValue !== undefined) {
+    total = (billValue * peopleNumber) + tipAmount;
   } else {
     total = billValue * peopleNumber;
   }
+  tipTotal_text.innerText = total.toFixed(1);
 }
 
 /*------------------------------------------------------------------------
@@ -154,6 +168,8 @@ function updateTotalMoney() {
 const billMessage = document.getElementById("billMessage");
 const peopleNumberMessage = document.getElementById("pepleNum-message");
 const customTipMessage = document.getElementById("selectTip-message");
+
+
 
 // INPUTS VALIDATION
 
@@ -174,6 +190,8 @@ function inputValidation(value, caseNum, input, messageTag) {
   }
 }
 
+
+
 // PRINT ERROR MESSAGE FOR SPECIFIC INPUT
 
 function setErrorMessage(num, message) {
@@ -190,6 +208,8 @@ function setErrorMessage(num, message) {
   }
 }
 
+
+
 // CLEAR INPUT VALIDATION
 
 function cleatInputValidation(input) {
@@ -203,6 +223,8 @@ function cleatInputValidation(input) {
            RESET FUNCTION
 
 ------------------------------------*/
+
+
 
 // RESET EVERY THING IN THE CARD
 
