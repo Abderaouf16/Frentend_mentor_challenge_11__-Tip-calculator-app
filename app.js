@@ -52,12 +52,16 @@ let total;
 
 function updateBillValue() {
   billValue = billInput.value;
-
+  
   if (peopleNumber == undefined) {
     total == "";
-  } else {
-    updateTotalMoney();
+  } else if (isNaN(billValue)){
+    console.log('billvalue is not a number')
+  }else{
+    updateTotalMoney()
+
   }
+
   updateTipAmount();
   inputValidation(billValue, 1, bill_Container, billMessage);
 }
@@ -139,11 +143,14 @@ function getPeopleNumber() {
   if (billValue == undefined) {
     bill_Container.style.border = "1px solid red";
     setErrorMessage(1, "Cant't be blank");
+  }else if (isNaN(peopleNumber)){
+    console.log('people number in not a number')
   }else{
     updateTotalMoney();
+    
   }
-
   inputValidation(peopleNumber, 3, peopleNum_Container, peopleNumberMessage);
+
 }
 
 
@@ -153,7 +160,7 @@ function getPeopleNumber() {
 function updateTotalMoney() {
   if (tipAmount !== undefined && billValue !== undefined) {
     total = (billValue * peopleNumber) + tipAmount;
-  } else {
+  } else if (billValue !== undefined && peopleNumber !== undefined) {
     total = billValue * peopleNumber;
   }
   tipTotal_text.innerText = total.toFixed(1);
@@ -187,6 +194,7 @@ function inputValidation(value, caseNum, input, messageTag) {
   } else {
     input.style.border = "1px solid green";
     messageTag.innerText = "";
+    
   }
 }
 
